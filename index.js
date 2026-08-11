@@ -37,4 +37,23 @@ const handleFirstTab = (e) => {
       alterStyles(isBackToTopRendered);
     }
   });
+
+  // Mobile nav toggle
+  const nav = document.querySelector('.nav');
+  const navToggle = document.querySelector('.nav__toggle');
+
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('nav--open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!nav.classList.contains('nav--open')) return;
+      if (nav.contains(e.target)) return;
+      nav.classList.remove('nav--open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  }
   
